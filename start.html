@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding: 0;
+			}
+			section{
+				width:200px;
+				height:50px;
+				margin:auto;
+				position: absolute;
+				left:0;
+				top:0;
+				bottom:0;
+				right: 0;
+				border: 1px solid #ccc;
+				text-align: center;
+			}
+			section div{
+				height:16px;
+				width:80px;
+				
+				margin:15px auto;
+				
+			}
+			ul{
+				list-style: none;
+				height:16px;
+				width:80px;
+				overflow: hidden;
+				padding:0;
+				margin:0;
+				position:relative;
+				background: url(img/star-matrix.gif) no-repeat 0 0;
+			}
+			ul li{
+				cursor:pointer;
+				float: left;
+				position:relative;
+				z-index: -999em;
+				
+			}
+			li a{
+				width:16px;
+				height:16px;
+				position: absolute;
+				top:0;
+				left:0;
+				z-index: 200;
+				
+			}
+			li.one a{
+				left:0;
+			}
+			li.two a{
+				left:16px;
+			}
+			li.three a{
+				left:32px;
+			}
+			li.four a{
+				left:48px;
+			}
+			li.five a{
+				left:64px;
+			}
+			li a:hover{
+				width:80px;
+				height:16px;
+				z-index: 2;
+				overflow: hidden;
+				left:0;
+				background: url(img/star-matrix.gif) no-repeat 0 0;
+			}
+			li.one a:hover{
+				background-position: 0 -96px;
+			}
+			li.two a:hover{
+				background-position: 0 -112px;
+			}
+			li.three a:hover{
+				background-position: 0 -128px;
+			}
+			li.four a:hover{
+				background-position: 0 -144px;
+			}
+			li.five a:hover{
+				background-position: 0 -160px;
+			}
+			.onestar{
+				background-position: 0 -16px;
+			}
+			.twostar{
+				background-position: 0 -32px;
+			}
+			.threestar{
+				background-position: 0 -48px;
+			}
+			.fourstar{
+				background-position: 0 -64px;
+			}
+			.fivestar{
+				background-position: 0 -80px;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<div>
+				<ul>
+					<li class="one"><a title="1分" href="#"></a></li>
+					<li class="two"><a title="2分" href="#"></a></li>
+					<li class="three"><a title="3分" href="#"></a></li>
+					<li class="four"><a title="4分" href="#"></a></li>
+					<li class="five"><a title="5分" href="#"></a></li>
+				</ul>
+			</div>
+		</section>
+	</body>
+	<script type="text/javascript" src="js/jquery.js" ></script>
+	<script type="text/javascript">
+		$('ul li a').click(function(){
+			var cl=$(this).parent().attr('class');
+			
+			alert($(this).attr('title'));
+			$(this).parent().parent().removeClass().addClass(cl+'star');
+			return false;
+			
+		});
+	</script>
+</html>
