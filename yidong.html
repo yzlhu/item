@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+				
+			}
+			#div{
+				width:100px;
+				height:100px;
+				background:red;
+				position: absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<!--
+        	作者：741092075@qq.com
+        	时间：2017-08-02
+        	描述：
+        <button id="btn">按钮</button>-->
+        <div id="div"></div>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			var div=document.getElementById('div');
+			div.onmousedown=function(e){
+				e=e||window.event;
+				var x=e.clientX;
+				var y=e.clientY;
+				var x0=div.offsetLeft;
+				var y0=div.offsetTop;
+				document.onmousemove=function(e){
+					e=e||window.event;
+					var x1=e.clientX;
+					var y1=e.clientY;
+					var X=(x1-x)+x0;
+					var Y=(y1-y)+y0;
+					if(X<30){
+						X=0;
+					}else if(X>window.innerWidth-div.offsetWidth-30){
+						X=window.innerWidth-div.offsetWidth;
+					}
+					if(Y<30){
+						Y=0;
+					}else if(Y>window.innerHeight-div.offsetHeight-30){
+						Y=window.innerHeight-div.offsetHeight;
+					}
+					div.style.left=X+'px';
+					div.style.top=Y+'px';
+					
+				}
+				document.onmouseup=function(){
+					document.onmousedown=null;
+					document.onmousemove=null;
+				}
+				return false;
+			}
+		}
+		/*window.onload=function(){
+			var btn=document.getElementById('btn');
+			if(btn.addEventListener){
+				btn.addEventListener('click',function(){
+					alert('a');
+				},false);
+				btn.addEventListener('click',function(){
+					alert('b');
+				},false);
+			}else{
+				
+				btn.attachEvent('onclick',function(){
+					alert('a');
+				})
+				btn.attachEvent('onclick',function(){
+					alert('b');
+				})
+			}*/
+/*			btn.onclick=function(){
+				alert('a');
+			}
+			btn.onclick=function(){
+				alert('b');
+			}*/
+		
+	</script>
+</html>

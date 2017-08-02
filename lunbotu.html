@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+			ul,ol{
+				list-style: none;
+			}
+			.box{
+				position:relative;
+				width:600px;
+				height:400px;
+				overflow: hidden;
+				margin:100px auto;
+			}
+			.banner >li{
+				position:absolute;
+				top:0;
+				left:0;
+			}
+			
+			.ctrl-banner{
+				position:absolute;
+				right: 10px;
+				bottom:10px;
+				z-index:999;
+			}
+			.ctrl-banner > li{
+				width:25px;
+				height:25px;
+				margin-right:5px;
+				border-radius: 50%;
+				cursor:pointer;
+				text-align: center;
+				line-height:25px;
+				float:left;
+				background-color:#46a3ff;
+				color:#fff;
+			}
+			.ctrl-banner > .active{
+				background-color:#e831ff;
+			}
+			span{
+				width:40px;
+				height:80px;
+				background-color:rgba(0,0,0,.2);
+				color:#fff;
+				font-size:50px;
+				font-family: '黑体';
+				position:absolute;
+				top:160px;
+				text-align:center;
+				cursor:pointer;
+				z-index:999;
+				line-height:80px;
+			}
+			span:hover{
+				background-color:rgba(0,0,0,.6);
+			}
+			.span-right{
+				right:0;
+			}
+			.span-left{
+				left:0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul class="banner"></ul>
+			<ol class="ctrl-banner"></ol>
+			<span class="span-right">></span>
+			<span class="span-left"><</span>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery.js" ></script>
+	<script type="text/javascript">
+		var data = ['img/IMG_20160125_090238.jpg',
+        'img/IMG_20160228_122320.jpg',
+        'img/IMG_20160228_122730.jpg',
+        'img/IMG_20160228_122736.jpg'
+    	];
+    	//动态添加
+    	var pic_str='';
+    	var ctrl_str='';
+    	for(var i=0;i<data.length;i++){
+    		ctrl_str+='<li>'+(i+1)+'</li>';
+    		pic_str+='<li><img style="width:600px;height:400px" src="'+data[i]+'"/></li>';
+    	}
+    	$('.banner').html(pic_str);
+    	$('.ctrl-banner').html(ctrl_str);
+    	
+    	$('.banner>li').eq(0).css('z-index','999');
+    	$('.ctrl-banner > li').eq(0).addClass('active');
+    	var index=0;
+    	var timer=null;
+    	
+    	function move(num){
+    		num >0 ? index++ :index--;
+    		index>data.length-1?index=0:index;
+    		index<0?index=data.length-1:index;
+    		$('.banner>li').eq(index).stop().fadeIn().siblings().fadeOut();
+    		$('.ctrl-banner>li').eq(index).addClass('active').siblings().removeClass('active');
+    	}
+    	$(function(){
+    		var timer_img=setInterval(function(){move(1)},2000);
+    		$('.banner>li').hover(function(){
+    			clearInterval(timer_img);
+    		},function(){
+    			timer_img=setInterval(function(){move(1)},2000);
+    		})
+    		$('.ctrl-banner >li').hover(function(){
+    			clearInterval(timer_img);
+    			index=$('.ctrl-banner >li').index($(this));
+    			$('.banner>li').eq(index).stop().fadeIn().siblings().fadeOut();
+    			$('.ctrl-banner>li').eq(index).addClass('active').siblings().removeClass('active');
+    		},function(){
+    			index=$('.ctrl-banner >li').index($(this));
+    			timer_img=setInterval(function(){move(1)},2000)
+    		})
+    		$('.span-left').click(function(){
+    			move(-1);
+    		})
+    		$('.span-right').click(function(){
+    			move(1);
+    		})
+    	})
+    
+    	
+	</script>
+</html>

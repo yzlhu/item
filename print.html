@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#text{
+				width:600px;
+				height:400px;
+				margin:100px auto;
+				display: block;
+				border:1px solid #ccc;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="text"></div>
+	</body>
+	<script type="text/javascript" src="js/jquery.js" ></script>
+	<script>
+		var str='#test{<br>background-color:blue;<br>color:#fff;<br>padding:10px;<br>}<br>';
+		var text=document.getElementById('text');
+		var i=0;
+		var timer=null;
+		$(function(){
+			
+			timer=setInterval(function(){
+				var current = str.substr(i, 1);
+			
+					if(current == '<'){
+					//indexOf() 方法返回">"在字符串中首次出现的位置。
+						i = str.indexOf('>',i) + 1;
+					}else{
+						i++;
+					}
+				if(i>=str.length){
+					clearInterval(timer);
+					$('#text').css('color','#fff');
+				}else{
+					$('#text').html(str.substring(0,i)+ (i <str.length-4 ? '|': ''));
+					if(i==32){
+						$('#text').css('background-color','blue');
+					}
+					if(i==47){
+						$('#text').css('color','#fff');
+					}
+					if(i==64){
+						$(text).css('padding','10px');
+					}
+				
+				}
+			},100);
+			
+			
+		})
+		
+		
+	</script>
+</html>
